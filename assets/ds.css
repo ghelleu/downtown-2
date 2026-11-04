@@ -1355,6 +1355,15 @@ footer.site .logo.dt img{height:46px}
 .theme-sw i{width:12px;height:12px;border-radius:50%;border:1.5px solid currentColor;background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
 .theme-sw:hover{border-color:var(--ink)}
 .overlay .theme-sw{margin-top:8px}
+/* Aucun texte coupé : les libellés passent à la ligne au lieu d'être tronqués */
+.rh b{white-space:nowrap;line-height:1}
+.roof li a{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.25;padding:2px 5px}
+.box .f:not(.top) span{white-space:normal;overflow:visible;text-overflow:clip;max-width:calc(100% - 8px);font-size:9.5px;line-height:1.15;letter-spacing:.04em}
+.fl b{display:block;white-space:normal;overflow-wrap:anywhere}
+.bb{width:max-content;max-width:none;margin-left:0;white-space:nowrap;
+  transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx))) translateX(-50%)}
+/* Le toit-plan épouse son contenu : pas de vide sous la liste */
+.roof{height:auto;min-height:0;overflow:visible}
 /* =====================================================================
    Système de famille (Cinetic Creatives, Progress, Downtown Studio)
    Fond noir, titres en capitales élargies grasses, texte fin, images nettes.
