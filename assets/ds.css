@@ -1364,6 +1364,9 @@ footer.site .logo.dt img{height:46px}
   transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx))) translateX(-50%)}
 /* Le toit-plan épouse son contenu : pas de vide sous la liste */
 .roof{height:auto;min-height:0;overflow:visible}
+/* Légendes des façades : plus grandes, entières */
+.box .f:not(.top) span{font-size:10.5px;line-height:1.15;padding:2px 5px;left:5px;top:5px;max-width:calc(100% - 10px)}
+.fl b{font-size:11px}
 /* =====================================================================
    Système de famille (Cinetic Creatives, Progress, Downtown Studio)
    Fond noir, titres en capitales élargies grasses, texte fin, images nettes.

@@ -80,8 +80,8 @@ document.body.appendChild(ft);
   var stage=el.querySelector('.iso-stage'),world=el.querySelector('.iso-world'),out=el.querySelector('[data-iso-info]'),def=out.textContent;
   var btns=el.querySelectorAll('[data-view]'),rz=-40,rx=56,live=false,t0=0,hold=0,moved=false;
   function fit(){var w=stage.clientWidth,iso=el.dataset.mode==='iso';
-    var s=iso?(w<700?w/760:Math.min(w/820,1.15)):Math.min(w/700,1.2),h=iso?Math.round(692*s)+70:Math.round(560*s)+20;
-    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?156*s:0)+'px')}
+    var s=iso?(w<700?w/840:Math.min(w/900,1.1)):Math.min(w/700,1.2),h=iso?Math.round(770*s)+70:Math.round(560*s)+20;
+    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?169*s:0)+'px')}
   function mode(m){el.dataset.mode=m;el.classList.remove('live');live=false;
     [].forEach.call(btns,function(b){b.setAttribute('aria-pressed',String(b.dataset.view===m))});
     rz=-40;rx=56;el.style.removeProperty('--rz');el.style.removeProperty('--rx');
