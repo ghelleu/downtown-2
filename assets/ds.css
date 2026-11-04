@@ -1205,7 +1205,7 @@ section.noir{margin-inline:0}
   background-image:radial-gradient(circle,rgba(var(--ink-rgb),.2) 1px,transparent 1.2px);background-size:10px 10px}
 .iso-stage.drag{cursor:grabbing}
 .iso-world{position:absolute;left:50%;top:50%;width:var(--W);height:var(--H);margin:calc(var(--H) / -2) 0 0 calc(var(--W) / -2);
-  transform-style:preserve-3d;transform:translateY(var(--oy,0px)) scale(var(--s,.7)) rotateX(var(--rx)) rotateZ(var(--rz));transition:transform 1.3s cubic-bezier(.7,0,.2,1)}
+  transform-style:preserve-3d;transform:translate(var(--ox,0px),var(--oy,0px)) scale(var(--s,.7)) rotateX(var(--rx)) rotateZ(var(--rz));transition:transform 1.3s cubic-bezier(.7,0,.2,1)}
 .iso.live .iso-world{transition:none}
 .ground,.bldg{position:absolute;inset:0;transform-style:preserve-3d;pointer-events:none}
 .ground *,.bldg>*{pointer-events:auto}
@@ -1361,25 +1361,81 @@ footer.site .logo.dt img{height:46px}
 .box .f:not(.top) span{white-space:normal;overflow:visible;text-overflow:clip;max-width:calc(100% - 8px);font-size:9.5px;line-height:1.15;letter-spacing:.04em}
 .fl b{display:block;white-space:normal;overflow-wrap:anywhere}
 .bb{width:max-content;max-width:none;margin-left:0;white-space:nowrap;
-  transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--bbz,0px) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx))) translateX(-50%)}
+  transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--bbz,0px) + var(--n) * var(--gap) + 84px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx))) translateX(-50%)}
 /* Le toit-plan épouse son contenu : pas de vide sous la liste */
 .roof{height:auto;min-height:0;overflow:visible}
 /* Légendes des façades : plus grandes, entières */
 .box .f:not(.top) span{font-size:10.5px;line-height:1.15;padding:2px 5px;left:5px;top:5px;max-width:calc(100% - 10px)}
 .fl b{font-size:11px}
-/* La place : trois maisons autour d'elle, l'entrée y mène */
-.pave{position:absolute;left:0;top:0;width:var(--w);height:var(--d);transform:translate3d(0,0,.5px);pointer-events:none;
-  background:#fff repeating-linear-gradient(45deg,transparent 0 9px,rgba(230,72,58,.22) 9px 10px),#fff;border:2px dashed var(--red);box-sizing:border-box;opacity:0;transition:opacity .8s .6s}
-.iso[data-mode="iso"] .pave{opacity:1}
-.b-place .roof{height:var(--d);border-style:dashed;border-color:var(--red);background:#fff repeating-linear-gradient(45deg,transparent 0 9px,rgba(230,72,58,.16) 9px 10px)}
-.b-place .rh span{color:var(--red)}
-.b-place .roof li a{background:#fff}
-.b-place .roof li.ext a{background:var(--ext)}
-.b-place .bb{background:var(--red)}
-.b-place .shadow{display:none}
-.b-apprendre .roof ol{grid-template-columns:repeat(3,minmax(0,1fr))}
-/* L'agenda, à part des trois portes dans l'en-tête */
-nav.links a.ag::before{content:"";position:absolute;left:-17px;top:50%;width:1px;height:14px;margin-top:-7px;background:currentColor;opacity:.35}
+
+/* ---------- Le bâtiment réel : volumes noirs, hall sous verrière, personnages (d'après les photos du lieu) ---------- */
+/* Les maisons : des volumes noirs percés de fenêtres, quelques-unes allumées */
+.box .f.sy{background-color:#262626}.box .f.sx{background-color:#121212}.box .f.nx{background-color:#363636}.box .f.ny{background-color:#1c1c1c}
+.box .f:not(.top){border-color:#000;background-size:auto;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='18'%3E%3Crect x='6' y='5' width='8' height='8' fill='%23505050'/%3E%3C/svg%3E")}
+.box:nth-of-type(3n) .f:not(.top){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='22'%3E%3Crect y='8' width='24' height='6' fill='%23484848'/%3E%3Crect x='11' y='8' width='2' height='6' fill='%23151515'/%3E%3C/svg%3E")}
+.box:nth-of-type(3n+1) .f:not(.top){background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='36'%3E%3Cg fill='%23505050'%3E%3Crect x='6' y='5' width='8' height='9'/%3E%3Crect x='46' y='5' width='8' height='9'/%3E%3Crect x='26' y='23' width='8' height='9'/%3E%3Crect x='46' y='23' width='8' height='9'/%3E%3C/g%3E%3Crect x='26' y='5' width='8' height='9' fill='%23f2c46d'/%3E%3Crect x='6' y='23' width='8' height='9' fill='%23e8b45a'/%3E%3C/svg%3E")}
+.box.ext .f:not(.top){border-color:#063a49;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='18'%3E%3Crect x='6' y='5' width='8' height='8' fill='%2382c0d2' fill-opacity='.55'/%3E%3C/svg%3E")}
+.box .f:not(.top) span{border-color:#000}
+.box:hover .f:not(.top){background-color:var(--red)!important}
+.shadow{background:rgba(0,0,0,.16)}
+/* Le sol : la cour couverte en pavés, le trottoir de la rue */
+.hall-floor{position:absolute;background:#bcae9c url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14'%3E%3Cpath d='M0 .5H14M0 7.5H14M.5 0V7M7.5 7V14' stroke='%23a29380' stroke-width='1' fill='none'/%3E%3C/svg%3E");box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)}
+.lot .hall-lab{transform:translateX(-50%);font-size:15px;font-weight:500;letter-spacing:.32em;color:rgba(0,0,0,.5)!important}
+.walk-st{position:absolute;height:64px;background:#e7e7e7;border-top:3px solid #c7c7c7;border-bottom:1px solid #d0d0d0}
+.street{bottom:-58px!important}
+/* Le décor vivant */
+.iso-sym{position:absolute;width:0;height:0;overflow:hidden}
+.life{position:absolute;left:0;top:0;width:0;height:0;transform-style:preserve-3d;pointer-events:none}
+.life *{pointer-events:none}
+.sp{position:absolute;left:0;top:0;transform-style:preserve-3d;transform:translate3d(var(--x),var(--y),0)}
+.sp .fig{position:absolute;left:calc(var(--sw) / -2);top:calc(-1 * var(--sh2));width:var(--sw);height:var(--sh2);overflow:visible;
+  transform-origin:50% 100%;transform:rotateZ(calc(-1 * var(--rz))) rotateX(calc(-1 * var(--rx)));opacity:0;transition:opacity .2s}
+.iso[data-mode="iso"] .sp .fig{opacity:1;transition:opacity .7s 1.15s}
+.sp .pv{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;box-sizing:border-box;background:currentColor;border:1.8px solid #141414;transition:all .5s}
+.iso[data-mode="iso"] .pp .pv{background:rgba(0,0,0,.2);border-color:transparent;transform:scale(1.5,1)}
+.palm .pv{left:-18px;top:-18px;width:36px;height:36px;border:0;background:radial-gradient(circle,#2f6146 0 6px,transparent 6.5px),repeating-conic-gradient(#4f8a5a 0 12deg,transparent 12deg 30deg)}
+.iso[data-mode="iso"] .palm .pv{background:radial-gradient(ellipse,rgba(0,0,0,.18),transparent 70%);transform:scale(1.2,.8)}
+.tbl .pv{left:-16px;top:-6px;width:32px;height:12px;border:0;border-radius:0;
+  background:radial-gradient(circle,#2f6146 0 5px,transparent 5.5px),linear-gradient(#2f6146,#2f6146) 0 50%/6px 6px no-repeat,linear-gradient(#2f6146,#2f6146) 100% 50%/6px 6px no-repeat}
+.iso[data-mode="iso"] .tbl .pv{opacity:.35}
+.sp.walk{animation:walk var(--du) linear var(--dl) infinite alternate}
+@keyframes walk{from{transform:translate3d(var(--x),var(--y),0)}to{transform:translate3d(var(--x2),var(--y2),0)}}
+.disc{position:absolute;left:-24px;top:-48px;width:48px;height:48px;border-radius:50%;opacity:0;transition:opacity .2s;
+  background:radial-gradient(circle,#fff 0 58%,#f6f2e6 72%,#e4ddcb);box-shadow:0 0 22px 8px rgba(255,246,220,.95),0 0 0 1px rgba(0,0,0,.18);
+  transform-origin:50% 100%;transform:translate3d(var(--x),var(--y),58px) rotateZ(calc(-1 * var(--rz))) rotateX(calc(-1 * var(--rx)))}
+.iso[data-mode="iso"] .disc{opacity:1;transition:opacity .7s 1.15s}
+/* La verrière */
+.verriere,.bar-wrap,.bar3{position:absolute;left:0;top:0;transform-style:preserve-3d}
+.verriere i{position:absolute;left:0;top:0;transform-origin:0 0;opacity:0;transition:opacity .2s}
+.iso[data-mode="iso"] .verriere i{opacity:1;transition:opacity .8s 1.2s}
+.post{width:3px;background:#2b2b2b}
+.beam{height:3px;background:#2b2b2b}.beam.l{width:3px}
+.glass{background:rgba(150,196,212,.07) repeating-linear-gradient(90deg,transparent 0 29px,rgba(30,30,30,.32) 29px 30px);outline:1px solid rgba(30,30,30,.45)}
+/* Le bar : maison noire à toit pointu, comptoir allumé, guirlande d'ampoules */
+.bar3 .g{position:absolute;left:0;top:0;transform-origin:0 0;box-sizing:border-box;border:1px solid #000;background:#1d1d1d}
+.bar3 .sx{background:#101010}.bar3 .nx{background:#2d2d2d}
+.bar3 .gab{background:#262626;border:0;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.bar3 .roofp{background:#5b5b5b repeating-linear-gradient(90deg,transparent 0 9px,rgba(0,0,0,.22) 9px 10px);border-color:#222}
+.bar3 .roofp.n{background-color:#6f6f6f}
+.bar3 .counter{border:0;background:linear-gradient(#f3cf86,#cf9443)}
+.bar3 .bulbs{border:0;background:radial-gradient(circle,#fffbe6 0 1.4px,#ffcf6b 2px,transparent 3.2px) 0 50%/7px 8px repeat-x;filter:drop-shadow(0 0 3px #ffc65a)}
+/* L'agenda affiché dans le hall */
+.board .board-pv{position:absolute;left:-62px;top:-104px;width:124px;box-sizing:border-box;background:#fff;border:1.5px solid #141414;padding:5px 6px;display:grid;gap:2px;
+  font-family:var(--px);font-weight:300;font-size:9.5px;line-height:1.25;text-transform:uppercase;letter-spacing:.03em;color:#141414;transition:opacity .4s}
+.board-pv b{font-weight:500;font-size:10px;margin-bottom:2px}
+.board-pv a{display:block;border:1px solid #141414;padding:1px 5px;pointer-events:auto}
+.board-pv a.ext{background:var(--ext);color:#fff;border-color:var(--ext)}
+.board-pv a:hover{background:var(--red);color:#fff;border-color:var(--red)}
+.iso[data-mode="iso"] .board-pv{opacity:0}.iso[data-mode="iso"] .board-pv a{pointer-events:none}
+.board-f{display:flex;flex-direction:column;text-decoration:none;color:#141414}
+.iso[data-mode="iso"] .board-f{pointer-events:auto}
+.board-f .pst{display:grid;align-content:start;gap:3px;height:44px;box-sizing:border-box;background:#fff;border:2.5px solid #141414;padding:5px 5px;overflow:hidden}
+.board-f b{font-family:var(--px);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.02em;line-height:1}
+.board-f small{font-size:6.5px;line-height:1.15;text-transform:uppercase;letter-spacing:.02em}
+.board-f::after{content:"";flex:1;margin:0 10px;background:linear-gradient(90deg,#141414 3px,transparent 3px calc(100% - 3px),#141414 0)}
+.board-f:hover .pst{background:var(--red);border-color:var(--red);color:#fff}
+.hall-col .lab{display:block;color:var(--soft)}
+@media (prefers-reduced-motion:reduce){.sp.walk{animation:none}}
 /* =====================================================================
    Système de famille (Cinetic Creatives, Progress, Downtown Studio)
    Fond noir, titres en capitales élargies grasses, texte fin, images nettes.

@@ -18,15 +18,16 @@ var LOTS={};
 function T(t,who){return '<span class="tbd" data-who="'+who+'">[À VALIDER : '+t+']</span>'}
 
 /* ---------- En-tête ---------- */
-var MAIN=[['creer/index.html','Créer','creer'],['produire/index.html','Produire','produire'],['apprendre/index.html','Apprendre','apprendre'],['agenda/index.html','Agenda','agenda']];
-var DOORS=MAIN.slice(0,3);
-var SEC=[['a-propos/index.html','À propos','apropos']];
+/* Les trois portes, seules dans la navigation principale. L'agenda et À propos vont à droite, avec les outils. */
+var MAIN=[['creer/index.html','Créer','creer'],['produire/index.html','Produire','produire'],['apprendre/index.html','Apprendre','apprendre']];
+var DOORS=MAIN;
+var SEC=[['agenda/index.html','Agenda','agenda'],['a-propos/index.html','À propos','apropos']];
 function cur(k){return k===PAGE?' aria-current="page"':''}
 var hdr=document.createElement('header');hdr.className='top';
 hdr.innerHTML='<div class="gut max"><div class="bar">'+
   '<a class="logo dt" href="'+R+'index.html" aria-label="Downtown Studio, accueil"><img src="'+R+'img/logo-downtown.svg" alt="Downtown Studio"></a>'+
-  '<nav class="links" aria-label="Navigation principale">'+MAIN.map(function(m){return '<a href="'+R+m[0]+'" data-menu="'+m[2]+'"'+(m[2]==='agenda'?' class="ag"':'')+cur(m[2])+'>'+m[1]+'</a>'}).join('')+'</nav>'+
-  '<nav class="subnav" aria-label="Navigation secondaire">'+SEC.map(function(m){return '<a class="hide-m" href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+
+  '<nav class="links" aria-label="Navigation principale">'+MAIN.map(function(m){return '<a href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+'</nav>'+
+  '<nav class="subnav" aria-label="Navigation secondaire">'+SEC.map(function(m){return '<a'+(m[2]==='agenda'?'':' class="hide-m"')+' href="'+R+m[0]+'" data-menu="'+m[2]+'"'+cur(m[2])+'>'+m[1]+'</a>'}).join('')+
   '<a class="lang" href="#" data-later="Version anglaise · plus tard" title="Version anglaise prévue plus tard"><b>FR</b> / EN</a>'+
   '<button class="theme-sw" type="button" data-theme-sw><i></i><span></span></button>'+
   '<a class="member" href="https://access.downtownstudio.ch" target="_blank" rel="noopener">Espace membres ↗</a></nav>'+
@@ -56,7 +57,7 @@ document.getElementById('menuClose').addEventListener('click',function(){ov.hidd
   label();
 })();
 
-/* ---------- Pied de page : les trois portes et l'agenda, puis la maison ---------- */
+/* ---------- Pied de page : les trois portes, l'agenda, puis la maison ---------- */
 var ft=document.createElement('footer');ft.className='site';
 ft.innerHTML='<div class="in gut max">'+
   '<div class="col"><a class="logo dt" href="'+R+'index.html"><img src="'+R+'img/logo-downtown.svg" alt="Downtown Studio"></a>'+
@@ -64,7 +65,7 @@ ft.innerHTML='<div class="in gut max">'+
     '<a class="mail" href="mailto:contact@downtownstudio.ch" style="justify-self:start">contact@downtownstudio.ch</a>'+
     '<a href="'+R+'a-propos/index.html#acces">Plan d\'accès</a><p>Accueil : '+T('horaires d\'accueil du lieu','Pascal')+'</p></div>'+
   '<div class="col"><span class="k">Les trois portes</span>'+DOORS.map(function(m){return '<a href="'+R+m[0]+'">'+m[1]+'</a>'}).join('')+
-    '<span class="k">La place</span><a href="'+R+'agenda/index.html">Agenda</a>'+
+    '<span class="k">Agenda</span><a href="'+R+'agenda/index.html">Les prochaines dates</a><a href="'+R+'agenda/dans-la-ville/index.html">Dans la ville</a>'+
     '<span class="k">Contacts</span><a href="'+R+'contact/index.html">Projets, réservations, presse</a></div>'+
   '<div class="col"><span class="k">Ce que Downtown a fondé</span>'+
     '<a href="https://guillaumehelleu.com/progress/" target="_blank" rel="noopener">Progress ↗</a>'+
@@ -81,10 +82,10 @@ document.body.appendChild(ft);
 [].forEach.call(document.querySelectorAll('[data-iso]'),function(el){
   var stage=el.querySelector('.iso-stage'),world=el.querySelector('.iso-world'),out=el.querySelector('[data-iso-info]'),def=out.textContent;
   var btns=el.querySelectorAll('[data-view]'),rz=-18,rx=56,live=false,t0=0,hold=0,moved=false;
-  var K=+el.dataset.k||1,IH=+el.dataset.ih||770,IO=+el.dataset.io||169;   /* K : largeur du monde rapportée à 760 px */
+  var K=+el.dataset.k||1,IH=+el.dataset.ih||770,IO=+el.dataset.io||169,OX=+el.dataset.ox||0,PH=+el.dataset.ph||585,PO=+el.dataset.po||0;   /* K : largeur du monde rapportée à 760 px */
   function fit(){var w=stage.clientWidth,iso=el.dataset.mode==='iso';
-    var s=iso?(w<700?w/(840*K):Math.min(w/(900*K),1.1)):Math.min(w/(700*K),1.2),h=iso?Math.round(IH*s)+70:Math.round(585*s)+20;
-    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?300:260)+'px');world.style.setProperty('--oy',(iso?IO*s:0)+'px')}
+    var s=iso?(w<700?w/(820*K):Math.min(w/(860*K),1.25)):Math.min(w/(700*K),1.2),h=iso?Math.round(IH*s)+70:Math.round(PH*s)+20;
+    stage.style.setProperty('--s',s);stage.style.setProperty('--sh',Math.max(h,iso?240:240)+'px');world.style.setProperty('--oy',(iso?IO*s:PO*s)+'px');world.style.setProperty('--ox',(iso?OX*s:0)+'px')}
   function mode(m){el.dataset.mode=m;el.classList.remove('live');live=false;
     [].forEach.call(btns,function(b){b.setAttribute('aria-pressed',String(b.dataset.view===m))});
     rz=-18;rx=56;el.style.removeProperty('--rz');el.style.removeProperty('--rx');
@@ -113,6 +114,7 @@ document.body.appendChild(ft);
     el.style.setProperty('--rz',(rz+Math.sin((t-t0)/2600)*7)+'deg')}
   requestAnimationFrame(tick);
   if(!reduce)setInterval(function(){var u=units[Math.floor(Math.random()*units.length)];if(!u)return;u.classList.add('lit');setTimeout(function(){u.classList.remove('lit')},900)},380);
+  if(reduce)[].forEach.call(el.querySelectorAll('svg'),function(v){if(v.pauseAnimations)v.pauseAnimations()});
   /* Arrivée : le plan, puis les immeubles se montent */
   fit();window.addEventListener('resize',fit);
   if(stage.clientWidth<700){el.querySelector('.iso-list').open=true}
