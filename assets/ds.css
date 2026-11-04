@@ -1190,7 +1190,7 @@ section.noir{margin-inline:0}
    La maison en volume : un îlot dense, en plan ou en isométrie (piloté par ds.js)
    ===================================================================== */
 .iso{border:1px solid var(--ink);background:var(--bg);--rx:0deg;--rz:0deg;--gap:0px;--ext:var(--petrol)}
-.iso[data-mode="iso"]{--rx:56deg;--rz:-40deg}
+.iso[data-mode="iso"]{--rx:56deg;--rz:-18deg}
 .iso-bar,.iso-info{display:flex;align-items:center;gap:16px;padding:10px 16px;border-bottom:1px solid var(--ink)}
 .iso-info{border-bottom:0;border-top:1px solid var(--ink);align-items:baseline;min-height:46px}
 .iso-info [data-iso-info]{font-weight:500}
@@ -1361,12 +1361,25 @@ footer.site .logo.dt img{height:46px}
 .box .f:not(.top) span{white-space:normal;overflow:visible;text-overflow:clip;max-width:calc(100% - 8px);font-size:9.5px;line-height:1.15;letter-spacing:.04em}
 .fl b{display:block;white-space:normal;overflow-wrap:anywhere}
 .bb{width:max-content;max-width:none;margin-left:0;white-space:nowrap;
-  transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx))) translateX(-50%)}
+  transform:translate3d(calc(var(--w) / 2),calc(var(--d) / 2),calc(var(--top) + var(--bbz,0px) + var(--n) * var(--gap) + 56px)) rotateZ(calc(-1 * (var(--rz) + var(--rot,0deg)))) rotateX(calc(-1 * var(--rx))) translateX(-50%)}
 /* Le toit-plan épouse son contenu : pas de vide sous la liste */
 .roof{height:auto;min-height:0;overflow:visible}
 /* Légendes des façades : plus grandes, entières */
 .box .f:not(.top) span{font-size:10.5px;line-height:1.15;padding:2px 5px;left:5px;top:5px;max-width:calc(100% - 10px)}
 .fl b{font-size:11px}
+/* La place : trois maisons autour d'elle, l'entrée y mène */
+.pave{position:absolute;left:0;top:0;width:var(--w);height:var(--d);transform:translate3d(0,0,.5px);pointer-events:none;
+  background:#fff repeating-linear-gradient(45deg,transparent 0 9px,rgba(230,72,58,.22) 9px 10px),#fff;border:2px dashed var(--red);box-sizing:border-box;opacity:0;transition:opacity .8s .6s}
+.iso[data-mode="iso"] .pave{opacity:1}
+.b-place .roof{height:var(--d);border-style:dashed;border-color:var(--red);background:#fff repeating-linear-gradient(45deg,transparent 0 9px,rgba(230,72,58,.16) 9px 10px)}
+.b-place .rh span{color:var(--red)}
+.b-place .roof li a{background:#fff}
+.b-place .roof li.ext a{background:var(--ext)}
+.b-place .bb{background:var(--red)}
+.b-place .shadow{display:none}
+.b-apprendre .roof ol{grid-template-columns:repeat(3,minmax(0,1fr))}
+/* L'agenda, à part des trois portes dans l'en-tête */
+nav.links a.ag::before{content:"";position:absolute;left:-17px;top:50%;width:1px;height:14px;margin-top:-7px;background:currentColor;opacity:.35}
 /* =====================================================================
    Système de famille (Cinetic Creatives, Progress, Downtown Studio)
    Fond noir, titres en capitales élargies grasses, texte fin, images nettes.
